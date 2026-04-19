@@ -1,0 +1,173 @@
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #111;
+  color: white;
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* group right side buttons */
+.navbar button {
+  margin-left: 10px;
+}
+
+/* push FIRST button (Cart) to right */
+.navbar button:first-of-type {
+  margin-left: auto;
+}
+.welcome {
+  background: green;
+  color: white;
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* FOOD CARD */
+.card {
+  background: #222;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* BUTTONS */
+button {
+  background: orange;
+  border: none;
+  padding: 8px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button.active {
+  background: white;
+  color: black;
+  font-weight: bold;
+}
+
+/* INPUT */
+input {
+  padding: 6px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: none;
+}
+
+/* LOGIN */
+.login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+}
+
+.login-box {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  border-radius: 10px;
+}
+
+/* CART PAGE (optional old page) */
+.cart {
+  padding: 20px;
+}
+
+/* TOAST */
+.toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: green;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 999;
+  animation: slideDown 0.3s ease-in-out;
+}
+
+/* SETTINGS BOX (TOP RIGHT) */
+.side-settings {
+  position: fixed;
+  right: 10px;
+  top: 70px;
+  width: 220px;
+  background: #1f1f1f;
+  padding: 15px;
+  border-radius: 10px;
+  z-index: 1001;
+}
+
+/* CART NEAR SETTINGS (BELOW IT) */
+.side-cart {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 300px;
+  height: 100vh;
+  background: #1c1c1c;
+  color: white;
+  padding: 15px;
+  overflow-y: auto;
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+
+/* CART IMAGE */
+.side-cart img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* CART ITEM */
+.cart-item {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+  background: #2a2a2a;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+/* CART BUTTONS */
+.cart-item button {
+  margin: 2px;
+  padding: 3px 8px;
+}
+
+/* ANIMATION */
+@keyframes slideDown {
+  from {
+    transform: translateX(-50%) translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}   
