@@ -7,7 +7,6 @@ export default function Navbar({ count }) {
 
   return (
     <>
-      {/* 👇 TOP WELCOME BAR */}
       {user && (
         <div
           style={{
@@ -22,17 +21,12 @@ export default function Navbar({ count }) {
         </div>
       )}
 
-      {/* NAVBAR */}
       <div className="navbar">
         <h2>🍔 QuickBite</h2>
 
-        <button onClick={() => navigate("/cart")}>
-          Cart ({count})
-        </button>
+        <button onClick={() => navigate("/cart")}>Cart ({count})</button>
 
-        <button onClick={() => navigate("/settings")}>
-          ⚙️ Settings
-        </button>
+        <button onClick={() => navigate("/settings")}>⚙️ Settings</button>
       </div>
     </>
   );

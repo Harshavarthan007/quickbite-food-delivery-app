@@ -30,18 +30,23 @@ export default function Home() {
   else if (hour < 18) greeting = "Good Afternoon";
   else greeting = "Good Evening";
 
-  // 🔥 FILTER LOGIC (CATEGORY + SEARCH + PRICE)
+  // ✅ FILTER LOGIC (FIXED PRICE RANGES)
   const filtered = foodItems.filter((item) => {
     const matchCategory = category === "all" || item.category === category;
 
     const matchSearch = item.name.toLowerCase().includes(search.toLowerCase());
 
-    const matchPrice =
-      price === "all" ||
-      (price === "100" && item.price <= 100) ||
-      (price === "200" && item.price <= 200) ||
-      (price === "300" && item.price <= 300) ||
-      (price === "500" && item.price > 300);
+    let matchPrice = true;
+
+    if (price === "0-100") {
+      matchPrice = item.price <= 100;
+    } else if (price === "100-200") {
+      matchPrice = item.price > 100 && item.price <= 200;
+    } else if (price === "200-300") {
+      matchPrice = item.price > 200 && item.price <= 300;
+    } else if (price === "300+") {
+      matchPrice = item.price > 300;
+    }
 
     return matchCategory && matchSearch && matchPrice;
   });
@@ -59,6 +64,7 @@ export default function Home() {
     <div>
       <Navbar count={cart.reduce((a, c) => a + c.qty, 0)} />
 
+      {/* 👋 Welcome Message */}
       {user && showWelcome && (
         <div
           style={{
@@ -73,6 +79,7 @@ export default function Home() {
         </div>
       )}
 
+      {/* 🔍 SEARCH */}
       <div style={{ textAlign: "center", marginTop: "10px" }}>
         <input
           type="text"
@@ -89,6 +96,7 @@ export default function Home() {
         />
       </div>
 
+      {/* 🍽 CATEGORY */}
       <h2 style={{ textAlign: "center", marginTop: "15px" }}>🍽 Categories</h2>
 
       <div style={{ textAlign: "center" }}>
@@ -115,38 +123,47 @@ export default function Home() {
         </button>
 
         <button
-          className={price === "100" ? "active" : ""}
-          onClick={() => setPrice("100")}
+          className={price === "0-100" ? "active" : ""}
+          onClick={() => setPrice("0-100")}
         >
-          ₹100
+          ₹0 - ₹100
         </button>
 
         <button
-          className={price === "200" ? "active" : ""}
-          onClick={() => setPrice("200")}
+          className={price === "100-200" ? "active" : ""}
+          onClick={() => setPrice("100-200")}
         >
-          ₹200
+          ₹100 - ₹200
         </button>
 
         <button
-          className={price === "300" ? "active" : ""}
-          onClick={() => setPrice("300")}
+          className={price === "200-300" ? "active" : ""}
+          onClick={() => setPrice("200-300")}
         >
-          ₹300
+          ₹200 - ₹300
         </button>
 
         <button
-          className={price === "500" ? "active" : ""}
-          onClick={() => setPrice("500")}
+          className={price === "300+" ? "active" : ""}
+          onClick={() => setPrice("300+")}
         >
-          ₹500+
+          ₹300+
         </button>
       </div>
 
+      {/* 🍔 FOOD GRID */}
       <div className="grid">
-        {filtered.map((item, i) => (
-          <FoodCard key={i} item={item} addToCart={addToCart} />
-        ))}
+        {filtered.length > 0 ? (
+          filtered.map((item) => (
+            <FoodCard
+              key={item.name} // ✅ fixed key
+              item={item}
+              addToCart={addToCart}
+            />
+          ))
+        ) : (
+          <p style={{ textAlign: "center" }}>No items found</p>
+        )}
       </div>
     </div>
   );
