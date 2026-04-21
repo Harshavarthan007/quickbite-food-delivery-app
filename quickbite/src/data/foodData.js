@@ -1,3 +1,9 @@
+import muttonBiriyani from "../assets/foods/mutton-biriyani.jpg";
+import muttonMasala from "../assets/foods/mutton-masala.jpg";
+import fishFry from "../assets/foods/fish-fry.jpg";
+import grillChicken from "../assets/foods/grill-chicken.jpg";
+import fishCurry from "../assets/foods/fish-curry.jpg";
+import paneer from "../assets/foods/paneer.jpg";
 export const foodItems = [
   {
     name: "Burger",
@@ -7,23 +13,59 @@ export const foodItems = [
   },
   {
     name: "Chicken Biriyani",
-    price: 180,
+    price: 250,
     category: "nonveg",
     img: new URL("../assets/foods/chicken-biriyani.jpg", import.meta.url).href,
   },
   {
     name: "Chicken Pizza",
-    price: 200,
+    price: 220,
     category: "nonveg",
     img: new URL("../assets/foods/chicken-pizza.jpg", import.meta.url).href,
   },
   {
     name: "Chicken Fried Rice",
-    price: 170,
+    price: 190,
     category: "nonveg",
     img: new URL("../assets/foods/chicken-fried.jpg", import.meta.url).href,
   },
+  {
+    name: "Mutton Biriyani",
+    price: 310,
+    category: "nonveg",
+    img: new URL("../assets/foods/mutton-biriyani.jpg", import.meta.url).href,
+  },
+  {
+    name: "Mutton Masala",
+    price: 120,
+    category: "nonveg",
+    img: new URL("../assets/foods/mutton-masala.jpg", import.meta.url).href,
+  },
+  {
+    name: "Fish Fry",
+    price: 150,
+    category: "nonveg",
+    img: new URL("../assets/foods/fish-fry.jpg", import.meta.url).href,
+  },
 
+  {
+    name: "Grill Chicken",
+    price: 350,
+    category: "nonveg",
+    img: new URL("../assets/foods/grill-chicken.jpg", import.meta.url).href,
+  },
+  {
+    name: "Fish Curry Meals",
+    price: 320,
+    category: "nonveg",
+    img: new URL("../assets/foods/fish-curry.jpg", import.meta.url).href,
+  },
+  {
+    name: "Paneer Butter Masala",
+    price: 320,
+    category: "veg",
+    img: new URL("../assets/foods/paneer.jpg", import.meta.url).href,
+  },
   {
     name: "Veg Pizza",
     price: 150,
