@@ -10,24 +10,18 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // SIGNUP
   const handleSignup = () => {
     if (!email || !password) {
       alert("Fill all fields");
       return;
     }
 
-    // ✅ SAVE USER (FIXED KEY)
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ email, password })
-    );
+    localStorage.setItem("user", JSON.stringify({ email, password }));
 
     alert("Account Created ✅");
     setIsSignup(false);
   };
 
-  // LOGIN
   const handleLogin = () => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
 
@@ -39,11 +33,7 @@ export default function Login() {
     if (email === storedUser.email && password === storedUser.password) {
       alert("Login Successful 🎉");
 
-      // ✅ IMPORTANT FIX HERE
-      localStorage.setItem(
-        "loggedUser",
-        JSON.stringify({ email })
-      );
+      localStorage.setItem("loggedUser", JSON.stringify({ email }));
 
       navigate("/home");
     } else {
@@ -105,7 +95,6 @@ export default function Login() {
           {isSignup ? "Create Account" : "Login"}
         </h3>
 
-        {/* EMAIL */}
         <input
           placeholder="Email"
           value={email}
@@ -120,7 +109,6 @@ export default function Login() {
           }}
         />
 
-        {/* PASSWORD */}
         <input
           type="password"
           placeholder="Password"
@@ -136,7 +124,6 @@ export default function Login() {
           }}
         />
 
-        {/* BUTTON */}
         {isSignup ? (
           <button
             onClick={handleSignup}
@@ -171,7 +158,6 @@ export default function Login() {
           </button>
         )}
 
-        {/* TOGGLE */}
         <p
           style={{
             cursor: "pointer",

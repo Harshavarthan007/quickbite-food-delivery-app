@@ -32,12 +32,9 @@ export default function Home() {
 
   // 🔥 FILTER LOGIC (CATEGORY + SEARCH + PRICE)
   const filtered = foodItems.filter((item) => {
-    const matchCategory =
-      category === "all" || item.category === category;
+    const matchCategory = category === "all" || item.category === category;
 
-    const matchSearch = item.name
-      .toLowerCase()
-      .includes(search.toLowerCase());
+    const matchSearch = item.name.toLowerCase().includes(search.toLowerCase());
 
     const matchPrice =
       price === "all" ||
@@ -62,7 +59,6 @@ export default function Home() {
     <div>
       <Navbar count={cart.reduce((a, c) => a + c.qty, 0)} />
 
-      {/* 👋 WELCOME */}
       {user && showWelcome && (
         <div
           style={{
@@ -77,7 +73,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* 🔍 SEARCH */}
       <div style={{ textAlign: "center", marginTop: "10px" }}>
         <input
           type="text"
@@ -94,10 +89,7 @@ export default function Home() {
         />
       </div>
 
-      {/* 🍽 CATEGORY */}
-      <h2 style={{ textAlign: "center", marginTop: "15px" }}>
-        🍽 Categories
-      </h2>
+      <h2 style={{ textAlign: "center", marginTop: "15px" }}>🍽 Categories</h2>
 
       <div style={{ textAlign: "center" }}>
         {btn("all", "All")}
@@ -151,14 +143,9 @@ export default function Home() {
         </button>
       </div>
 
-      {/* 🍔 FOOD GRID */}
       <div className="grid">
         {filtered.map((item, i) => (
-          <FoodCard
-            key={i}
-            item={item}
-            addToCart={addToCart}
-          />
+          <FoodCard key={i} item={item} addToCart={addToCart} />
         ))}
       </div>
     </div>

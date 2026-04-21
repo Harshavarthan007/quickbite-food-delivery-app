@@ -8,7 +8,6 @@ export default function Settings() {
   const [phone, setPhone] = useState("");
   const [darkMode, setDarkMode] = useState(false);
 
-  // load saved data
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("settings"));
 
@@ -19,7 +18,6 @@ export default function Settings() {
     }
   }, []);
 
-  // save settings
   const saveSettings = () => {
     localStorage.setItem(
       "settings",
@@ -27,13 +25,12 @@ export default function Settings() {
         name,
         phone,
         darkMode,
-      })
+      }),
     );
 
     alert("⚙️ Settings Saved!");
   };
 
-  // logout
   const logout = () => {
     localStorage.clear();
     navigate("/");
@@ -43,21 +40,18 @@ export default function Settings() {
     <div className="side-settings">
       <h3>⚙️ Settings</h3>
 
-      {/* NAME */}
       <input
         placeholder="Enter Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
 
-      {/* PHONE */}
       <input
         placeholder="Enter Phone"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
       />
 
-      {/* DARK MODE */}
       <label style={{ display: "block", marginTop: "10px" }}>
         <input
           type="checkbox"
@@ -67,14 +61,9 @@ export default function Settings() {
         🌙 Dark Mode
       </label>
 
-      {/* BUTTONS */}
-      <button onClick={saveSettings}>
-        💾 Save
-      </button>
+      <button onClick={saveSettings}>💾 Save</button>
 
-      <button onClick={() => navigate("/home")}>
-        🏠 Home
-      </button>
+      <button onClick={() => navigate("/home")}>🏠 Home</button>
 
       <button onClick={logout} style={{ background: "red", color: "white" }}>
         🚪 Logout

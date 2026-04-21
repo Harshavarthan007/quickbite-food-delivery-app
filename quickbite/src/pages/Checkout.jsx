@@ -9,7 +9,6 @@ export default function Checkout() {
 
   const [paymentMethod, setPaymentMethod] = useState("cod");
 
-  // 📡 GET LIVE LOCATION
   const getLocation = () => {
     if (!navigator.geolocation) {
       alert("Geolocation not supported");
@@ -23,11 +22,10 @@ export default function Checkout() {
         setLocation(`Lat: ${lat}, Lng: ${lng}`);
         alert("📍 Location captured!");
       },
-      () => alert("❌ Permission denied")
+      () => alert("❌ Permission denied"),
     );
   };
 
-  // 🚀 PLACE ORDER
   const placeOrder = () => {
     if (!name || !phone) {
       alert("Please enter name and phone number");
@@ -46,12 +44,16 @@ export default function Checkout() {
 
     alert(
       "🎉 ORDER PLACED SUCCESSFULLY!\n\n" +
-      "👤 Name: " + name + "\n" +
-      "📞 Phone: " + phone + "\n" +
-      "💰 Payment: Cash on Delivery 🚚\n" +
-      (useLiveLocation
-        ? "📍 Location: " + location
-        : "🏠 Address: " + address)
+        "👤 Name: " +
+        name +
+        "\n" +
+        "📞 Phone: " +
+        phone +
+        "\n" +
+        "💰 Payment: Cash on Delivery 🚚\n" +
+        (useLiveLocation
+          ? "📍 Location: " + location
+          : "🏠 Address: " + address),
     );
   };
 
@@ -59,7 +61,6 @@ export default function Checkout() {
     <div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
       <h1>📦 Checkout</h1>
 
-      {/* NAME */}
       <input
         placeholder="Enter Name"
         value={name}
@@ -67,7 +68,6 @@ export default function Checkout() {
         style={inputStyle}
       />
 
-      {/* PHONE */}
       <input
         placeholder="Enter Phone Number"
         value={phone}
@@ -75,7 +75,6 @@ export default function Checkout() {
         style={inputStyle}
       />
 
-      {/* PAYMENT METHOD */}
       <h3>💳 Payment Method</h3>
 
       <label>
@@ -100,19 +99,17 @@ export default function Checkout() {
         💳 Online Payment
       </label>
 
-      {/* LOCATION TOGGLE */}
       <div style={{ margin: "10px 0" }}>
         <label>
           <input
             type="checkbox"
             checked={useLiveLocation}
             onChange={() => setUseLiveLocation(!useLiveLocation)}
-          />
-          {" "}Use Live Location 📍
+          />{" "}
+          Use Live Location 📍
         </label>
       </div>
 
-      {/* ADDRESS OR LOCATION */}
       {!useLiveLocation ? (
         <textarea
           placeholder="Enter full address"
@@ -127,14 +124,11 @@ export default function Checkout() {
           </button>
 
           {location && (
-            <p style={{ fontSize: "12px", marginTop: "5px" }}>
-              {location}
-            </p>
+            <p style={{ fontSize: "12px", marginTop: "5px" }}>{location}</p>
           )}
         </div>
       )}
 
-      {/* PLACE ORDER */}
       <button onClick={placeOrder} style={orderBtn}>
         🚀 Place Order
       </button>
