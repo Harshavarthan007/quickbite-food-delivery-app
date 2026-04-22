@@ -3,6 +3,7 @@ import { CartContext } from "../context/CartContext";
 import { foodItems } from "../data/foodData";
 import Navbar from "../components/Navbar";
 import FoodCard from "../components/FoodCard";
+import Banner from "../components/Banner";
 
 export default function Home() {
   const { cart, addToCart } = useContext(CartContext);
@@ -10,9 +11,9 @@ export default function Home() {
   const [category, setCategory] = useState("all");
   const [search, setSearch] = useState("");
   const [price, setPrice] = useState("all");
+  const [sort, setSort] = useState("default");
 
   const user = JSON.parse(localStorage.getItem("loggedUser") || "null");
-
   const [showWelcome, setShowWelcome] = useState(true);
 
   useEffect(() => {
@@ -30,26 +31,32 @@ export default function Home() {
   else if (hour < 18) greeting = "Good Afternoon";
   else greeting = "Good Evening";
 
-  // ✅ FILTER LOGIC (FIXED PRICE RANGES)
-  const filtered = foodItems.filter((item) => {
-    const matchCategory = category === "all" || item.category === category;
+  // ✅ FILTER + SORT
+  const filtered = foodItems
+    .filter((item) => {
+      const matchCategory = category === "all" || item.category === category;
 
-    const matchSearch = item.name.toLowerCase().includes(search.toLowerCase());
+      const matchSearch = item.name
+        .toLowerCase()
+        .includes(search.toLowerCase());
 
-    let matchPrice = true;
+      let matchPrice = true;
 
-    if (price === "0-100") {
-      matchPrice = item.price <= 100;
-    } else if (price === "100-200") {
-      matchPrice = item.price > 100 && item.price <= 200;
-    } else if (price === "200-300") {
-      matchPrice = item.price > 200 && item.price <= 300;
-    } else if (price === "300+") {
-      matchPrice = item.price > 300;
-    }
+      if (price === "0-100") matchPrice = item.price <= 100;
+      else if (price === "100-200")
+        matchPrice = item.price > 100 && item.price <= 200;
+      else if (price === "200-300")
+        matchPrice = item.price > 200 && item.price <= 300;
+      else if (price === "300+") matchPrice = item.price > 300;
 
-    return matchCategory && matchSearch && matchPrice;
-  });
+      return matchCategory && matchSearch && matchPrice;
+    })
+    .sort((a, b) => {
+      if (sort === "low-high") return a.price - b.price;
+      if (sort === "high-low") return b.price - a.price;
+      if (sort === "rating") return b.rating - a.rating;
+      return 0;
+    });
 
   const btn = (name, label) => (
     <button
@@ -62,9 +69,14 @@ export default function Home() {
 
   return (
     <div>
-      <Navbar count={cart.reduce((a, c) => a + c.qty, 0)} />
+      {/* 🧭 NAVBAR (SEARCH INSIDE NAVBAR) */}
+      <Navbar
+        count={cart.reduce((a, c) => a + c.qty, 0)}
+        search={search}
+        setSearch={setSearch}
+      />
 
-      {/* 👋 Welcome Message */}
+      {/* 👋 WELCOME MESSAGE */}
       {user && showWelcome && (
         <div
           style={{
@@ -75,91 +87,62 @@ export default function Home() {
             fontWeight: "bold",
           }}
         >
-          {greeting}, {user.email} 👋 Welcome to QuickBite 🍔
+          {greeting}, {user.email} 👋 Welcome to QuickBite
         </div>
       )}
 
-      {/* 🔍 SEARCH */}
-      <div style={{ textAlign: "center", marginTop: "10px" }}>
-        <input
-          type="text"
-          placeholder="🔍 Search food..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          style={{
-            padding: "10px",
-            width: "250px",
-            borderRadius: "20px",
-            border: "none",
-            outline: "none",
-          }}
-        />
-      </div>
+      {/* 🖼 BANNER (ONLY IMAGES) */}
+      <Banner />
 
       {/* 🍽 CATEGORY */}
-      <h2 style={{ textAlign: "center", marginTop: "15px" }}>🍽 Categories</h2>
+      <h2 style={{ textAlign: "center", marginTop: "30px" }}>Categories</h2>
 
       <div style={{ textAlign: "center" }}>
         {btn("all", "All")}
-        {btn("veg", "Veg 🍃")}
-        {btn("nonveg", "Non-Veg 🍗")}
-        {btn("breakfast", "Breakfast 🍽")}
-        {btn("juices", "Juices 🧃")}
-        {btn("dessert", "Dessert 🍰")}
-        {btn("snacks", "Snacks 🍟")}
+        {btn("veg", "Veg")}
+        {btn("nonveg", "Non-Veg")}
+        {btn("breakfast", "Breakfast")}
+        {btn("juices", "Juices")}
+        {btn("dessert", "Dessert")}
+        {btn("snacks", "Snacks")}
       </div>
 
       {/* 💰 PRICE FILTER */}
-      <h3 style={{ textAlign: "center", marginTop: "10px" }}>
-        💰 Price Filter
-      </h3>
+      <h3 style={{ textAlign: "center", marginTop: "10px" }}>Price Filter</h3>
 
       <div style={{ textAlign: "center" }}>
-        <button
-          className={price === "all" ? "active" : ""}
-          onClick={() => setPrice("all")}
+        <select
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          style={{
+            padding: "10px",
+            borderRadius: "8px",
+            background: "#ffd700",
+            border: "1px solid black",
+          }}
         >
-          All
-        </button>
+          <option value="all">All Prices</option>
+          <option value="0-100">₹0 - ₹100</option>
+          <option value="100-200">₹100 - ₹200</option>
+          <option value="200-300">₹200 - ₹300</option>
+          <option value="300+">₹300+</option>
+        </select>
+      </div>
 
-        <button
-          className={price === "0-100" ? "active" : ""}
-          onClick={() => setPrice("0-100")}
-        >
-          ₹0 - ₹100
-        </button>
+      {/* ✨ SORT */}
+      <h3 style={{ textAlign: "center", marginTop: "15px" }}>Sort By</h3>
 
-        <button
-          className={price === "100-200" ? "active" : ""}
-          onClick={() => setPrice("100-200")}
-        >
-          ₹100 - ₹200
-        </button>
-
-        <button
-          className={price === "200-300" ? "active" : ""}
-          onClick={() => setPrice("200-300")}
-        >
-          ₹200 - ₹300
-        </button>
-
-        <button
-          className={price === "300+" ? "active" : ""}
-          onClick={() => setPrice("300+")}
-        >
-          ₹300+
-        </button>
+      <div style={{ textAlign: "center" }}>
+        <button onClick={() => setSort("low-high")}>Low → High</button>
+        <button onClick={() => setSort("high-low")}>High → Low</button>
+        <button onClick={() => setSort("rating")}>Top Rated</button>
       </div>
 
       {/* 🍔 FOOD GRID */}
       <div className="grid">
         {filtered.length > 0 ? (
           filtered.map((item) => (
-            <FoodCard
-              key={item.name} // ✅ fixed key
-              item={item}
-              addToCart={addToCart}
-            />
+            <FoodCard key={item.name} item={item} addToCart={addToCart} />
           ))
         ) : (
           <p style={{ textAlign: "center" }}>No items found</p>

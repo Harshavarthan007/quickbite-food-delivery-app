@@ -3,6 +3,7 @@ body {
   font-family: Arial;
   background: #111;
   color: white;
+  padding: 0;
 }
 
 /* NAVBAR */
@@ -42,6 +43,16 @@ body {
   background: #222;
   padding: 10px;
   border-radius: 10px;
+}
+.active-sort {
+  background: linear-gradient(45deg, orange, red);
+  color: white;
+  font-weight: bold;
+}
+
+button:hover {
+  transform: scale(1.05);
+  transition: 0.2s;
 }
 
 .card img {
@@ -135,7 +146,6 @@ input {
   box-shadow: -5px 0 10px rgba(0, 0, 0, 0.5);
 }
 
-
 /* CART IMAGE */
 .side-cart img {
   width: 60px;
@@ -170,4 +180,4 @@ input {
     transform: translateX(-50%) translateY(0);
     opacity: 1;
   }
-}   
+}

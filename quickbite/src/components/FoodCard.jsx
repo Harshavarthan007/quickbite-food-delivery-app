@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import sendIcon from "../assets/sent.png";
 
 export default function FoodCard({ item, addToCart }) {
@@ -6,10 +6,6 @@ export default function FoodCard({ item, addToCart }) {
   const [review, setReview] = useState("");
   const [sent, setSent] = useState(false);
   const [toast, setToast] = useState(false);
-
-  const displayRating = useMemo(() => {
-    return (Math.random() * (5 - 3.8) + 3.8).toFixed(1);
-  }, []);
 
   const sendReview = () => {
     if (rating === 0 || review === "") {
@@ -36,7 +32,7 @@ export default function FoodCard({ item, addToCart }) {
   };
 
   const handleShare = async () => {
-    const text = `🍔 ${item.name}\n💰 ₹${item.price}\n👉 ${window.location.href}`;
+    const text = `${item.name}\nPrice: ₹${item.price}\n${window.location.href}`;
 
     try {
       if (navigator.share) {
@@ -47,7 +43,7 @@ export default function FoodCard({ item, addToCart }) {
         });
       } else {
         await navigator.clipboard.writeText(text);
-        alert("Copied! Share it 🔗");
+        alert("Copied! Share it");
       }
     } catch (err) {
       console.log(err);
@@ -58,8 +54,7 @@ export default function FoodCard({ item, addToCart }) {
 
   return (
     <div className="card" style={{ position: "relative" }}>
-
-      {/* 🔥 DISCOUNT */}
+      {/* Discount */}
       {item.price <= 150 && (
         <div
           style={{
@@ -74,32 +69,28 @@ export default function FoodCard({ item, addToCart }) {
             fontWeight: "bold",
           }}
         >
-          🔥 20% OFF
+          20% OFF
         </div>
       )}
 
-      {/* 🟢 TOAST */}
-      {toast && (
-        <div className="toast">
-          🛒 {item.name} added to cart!
-        </div>
-      )}
+      {/* Toast */}
+      {toast && <div className="toast">{item.name} added to cart</div>}
 
       <img src={item.img} alt={item.name} />
 
       <h3>{item.name}</h3>
 
-      {/* ⭐ + ⏱ */}
+      {/* Rating + Delivery */}
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <span style={{ color: "gold", fontWeight: "bold" }}>
-          ⭐ {rating || displayRating}
+          ⭐ {rating > 0 ? rating : item.rating}
         </span>
         <span style={{ fontSize: "12px", color: "#ccc" }}>
-          ⏱ {deliveryTime} mins
+          {deliveryTime} mins
         </span>
       </div>
 
-      {/* 💰 PRICE */}
+      {/* Price */}
       {item.price <= 150 ? (
         <p>
           <span style={{ textDecoration: "line-through", color: "gray" }}>
@@ -113,9 +104,9 @@ export default function FoodCard({ item, addToCart }) {
         <p>₹{item.price}</p>
       )}
 
-      {/* ⭐ INPUT */}
+      {/* Rating Input */}
       <div>
-        ⭐ Rating:
+        Rating:
         {[1, 2, 3, 4, 5].map((star) => (
           <span
             key={star}
@@ -131,7 +122,7 @@ export default function FoodCard({ item, addToCart }) {
         ))}
       </div>
 
-      {/* 📝 REVIEW */}
+      {/* Review */}
       <input
         placeholder="Write review..."
         value={review}
@@ -140,16 +131,12 @@ export default function FoodCard({ item, addToCart }) {
       />
 
       {!sent ? (
-        <button onClick={sendReview}>
-          Send Review 📩
-        </button>
+        <button onClick={sendReview}>Send Review</button>
       ) : (
-        <p style={{ color: "lightgreen" }}>
-          🎉 Thanks for your review!
-        </p>
+        <p style={{ color: "lightgreen" }}>Thanks for your review</p>
       )}
 
-      {/* 🔥 ACTION */}
+      {/* Actions */}
       <div
         style={{
           display: "flex",
@@ -157,9 +144,7 @@ export default function FoodCard({ item, addToCart }) {
           alignItems: "center",
         }}
       >
-        <button onClick={handleAddToCart}>
-          Add to Cart 🛒
-        </button>
+        <button onClick={handleAddToCart}>Add to Cart</button>
 
         <button
           onClick={handleShare}
