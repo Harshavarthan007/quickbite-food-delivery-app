@@ -78,10 +78,16 @@ export default function FoodCard({ item, addToCart }) {
 
       <img src={item.img} alt={item.name} />
 
-      <h3>{item.name}</h3>
+      <h3 style={{ marginTop: "8px" }}>{item.name}</h3>
 
       {/* Rating + Delivery */}
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "8px",
+        }}
+      >
         <span style={{ color: "gold", fontWeight: "bold" }}>
           ⭐ {rating > 0 ? rating : item.rating}
         </span>
@@ -92,7 +98,7 @@ export default function FoodCard({ item, addToCart }) {
 
       {/* Price */}
       {item.price <= 150 ? (
-        <p>
+        <p style={{ marginTop: "8px" }}>
           <span style={{ textDecoration: "line-through", color: "gray" }}>
             ₹{Math.round(item.price * 1.2)}
           </span>{" "}
@@ -101,11 +107,11 @@ export default function FoodCard({ item, addToCart }) {
           </span>
         </p>
       ) : (
-        <p>₹{item.price}</p>
+        <p style={{ marginTop: "8px" }}>₹{item.price}</p>
       )}
 
       {/* Rating Input */}
-      <div>
+      <div style={{ marginTop: "8px" }}>
         Rating:
         {[1, 2, 3, 4, 5].map((star) => (
           <span
@@ -127,13 +133,23 @@ export default function FoodCard({ item, addToCart }) {
         placeholder="Write review..."
         value={review}
         onChange={(e) => setReview(e.target.value)}
-        style={{ width: "90%", marginTop: "5px" }}
+        style={{
+          width: "90%",
+          marginTop: "8px",
+          padding: "6px",
+          borderRadius: "6px",
+          border: "none",
+        }}
       />
 
       {!sent ? (
-        <button onClick={sendReview}>Send Review</button>
+        <button onClick={sendReview} style={{ marginTop: "8px" }}>
+          Send Review
+        </button>
       ) : (
-        <p style={{ color: "lightgreen" }}>Thanks for your review</p>
+        <p style={{ color: "lightgreen", marginTop: "8px" }}>
+          Thanks for your review
+        </p>
       )}
 
       {/* Actions */}
@@ -142,6 +158,7 @@ export default function FoodCard({ item, addToCart }) {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
+          marginTop: "10px",
         }}
       >
         <button onClick={handleAddToCart}>Add to Cart</button>

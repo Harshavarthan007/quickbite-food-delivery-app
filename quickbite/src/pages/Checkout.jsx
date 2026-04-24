@@ -1,13 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [location, setLocation] = useState("");
   const [useLiveLocation, setUseLiveLocation] = useState(false);
-
   const [paymentMethod, setPaymentMethod] = useState("cod");
+
+  const [orderSuccess, setOrderSuccess] = useState(false);
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -42,24 +46,37 @@ export default function Checkout() {
       return;
     }
 
-    alert(
-      "🎉 ORDER PLACED SUCCESSFULLY!\n\n" +
-        "👤 Name: " +
-        name +
-        "\n" +
-        "📞 Phone: " +
-        phone +
-        "\n" +
-        "💰 Payment: Cash on Delivery 🚚\n" +
-        (useLiveLocation
-          ? "📍 Location: " + location
-          : "🏠 Address: " + address),
-    );
+    // 📳 vibration
+    if (navigator.vibrate) {
+      navigator.vibrate(300);
+    }
+
+    // ⭐ SHOW SUCCESS SCREEN
+    setOrderSuccess(true);
+
+    // ⏳ AFTER 2.5 SEC GO TO HOME PAGE (FIXED)
+    setTimeout(() => {
+      setOrderSuccess(false);
+
+      // ✅ FIX: ALWAYS GO HOME (NOT LOGIN)
+      navigate("/", { replace: true });
+    }, 2500);
   };
 
   return (
     <div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
       <h1>📦 Checkout</h1>
+
+      {/* ✅ FULL SCREEN SUCCESS */}
+      {orderSuccess && (
+        <div className="success-page">
+          <div className="success-box">
+            <div className="tick">✔</div>
+            <h1>Order Placed Successfully!</h1>
+            <p>Thank you for your order 🍔</p>
+          </div>
+        </div>
+      )}
 
       <input
         placeholder="Enter Name"

@@ -228,6 +228,78 @@ input {
 .sort-container {
   text-align: center;
 }
+.order-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: green;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: bold;
+  z-index: 9999;
+  animation: pop 0.3s ease-in-out;
+}
+.success-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.success-box {
+  text-align: center;
+  background: #1c1c1c;
+  padding: 40px;
+  border-radius: 12px;
+  color: white;
+  animation: pop 0.3s ease-in-out;
+}
+
+.tick {
+  font-size: 60px;
+  color: lightgreen;
+  margin-bottom: 10px;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes pop {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: translateX(-50%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+}
 
 /* ===== ANIMATION ===== */
 @keyframes slideDown {
