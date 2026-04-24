@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo, useEffect } from "react";
 import sendIcon from "../assets/sent.png";
 
 export default function FoodCard({ item, addToCart }) {
@@ -6,6 +6,8 @@ export default function FoodCard({ item, addToCart }) {
   const [review, setReview] = useState("");
   const [sent, setSent] = useState(false);
   const [toast, setToast] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [wishlistToast, setWishlistToast] = useState(false);
 
   const sendReview = () => {
     if (rating === 0 || review === "") {
@@ -50,11 +52,42 @@ export default function FoodCard({ item, addToCart }) {
     }
   };
 
-  const deliveryTime = Math.floor(Math.random() * 20) + 15;
+  const deliveryTime = useMemo(() => {
+    return Math.floor(Math.random() * 20) + 15;
+  }, []);
+
+  useEffect(() => {
+    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+    setLiked(wishlist.some((w) => w.id === item.id));
+  }, [item.id]);
+
+  const toggleLike = () => {
+    let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    const exists = wishlist.some((w) => w.id === item.id);
+
+    if (exists) {
+      wishlist = wishlist.filter((w) => w.id !== item.id);
+      setLiked(false);
+    } else {
+      wishlist.push(item);
+      setLiked(true);
+
+      setWishlistToast(true);
+      setTimeout(() => setWishlistToast(false), 2000);
+    }
+
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+    // ✅ KEEP THIS
+    window.dispatchEvent(new Event("storage"));
+
+    // 🔥 ADD THIS LINE ONLY
+    window.dispatchEvent(new Event("wishlistUpdate"));
+  };
 
   return (
     <div className="card" style={{ position: "relative" }}>
-      {/* Discount */}
       {item.price <= 150 && (
         <div
           style={{
@@ -73,14 +106,43 @@ export default function FoodCard({ item, addToCart }) {
         </div>
       )}
 
-      {/* Toast */}
+      <div
+        onClick={toggleLike}
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          fontSize: "20px",
+          cursor: "pointer",
+          color: liked ? "red" : "white",
+        }}
+      >
+        {liked ? "❤️" : "🤍"}
+      </div>
+
+      {wishlistToast && (
+        <div
+          style={{
+            position: "absolute",
+            top: "40px",
+            right: "10px",
+            background: "green",
+            color: "white",
+            padding: "6px 10px",
+            borderRadius: "6px",
+            fontSize: "12px",
+          }}
+        >
+          ❤️ Added to Wishlist
+        </div>
+      )}
+
       {toast && <div className="toast">{item.name} added to cart</div>}
 
       <img src={item.img} alt={item.name} />
 
       <h3 style={{ marginTop: "8px" }}>{item.name}</h3>
 
-      {/* Rating + Delivery */}
       <div
         style={{
           display: "flex",
@@ -96,7 +158,6 @@ export default function FoodCard({ item, addToCart }) {
         </span>
       </div>
 
-      {/* Price */}
       {item.price <= 150 ? (
         <p style={{ marginTop: "8px" }}>
           <span style={{ textDecoration: "line-through", color: "gray" }}>
@@ -110,7 +171,6 @@ export default function FoodCard({ item, addToCart }) {
         <p style={{ marginTop: "8px" }}>₹{item.price}</p>
       )}
 
-      {/* Rating Input */}
       <div style={{ marginTop: "8px" }}>
         Rating:
         {[1, 2, 3, 4, 5].map((star) => (
@@ -128,7 +188,6 @@ export default function FoodCard({ item, addToCart }) {
         ))}
       </div>
 
-      {/* Review */}
       <input
         placeholder="Write review..."
         value={review}
@@ -152,7 +211,6 @@ export default function FoodCard({ item, addToCart }) {
         </p>
       )}
 
-      {/* Actions */}
       <div
         style={{
           display: "flex",
@@ -168,15 +226,18 @@ export default function FoodCard({ item, addToCart }) {
           style={{
             background: "#333",
             border: "none",
-            borderRadius: "50%",
-            padding: "8px",
+            borderRadius: "6px",
+            padding: "6px 10px",
             cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           <img
             src={sendIcon}
             alt="share"
-            style={{ width: "20px", height: "20px" }}
+            style={{ width: "16px", height: "16px" }}
           />
         </button>
       </div>

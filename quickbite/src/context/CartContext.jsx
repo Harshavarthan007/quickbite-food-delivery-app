@@ -6,14 +6,17 @@ export default function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
 
   const addToCart = (item) => {
-    const exist = cart.find(x => x.name === item.name);
-    if (exist) {
-      setCart(cart.map(x =>
-        x.name === item.name ? { ...x, qty: x.qty + 1 } : x
-      ));
-    } else {
-      setCart([...cart, { ...item, qty: 1 }]);
-    }
+    setCart((prev) => {
+      const exist = prev.find((x) => x.name === item.name);
+
+      if (exist) {
+        return prev.map((x) =>
+          x.name === item.name ? { ...x, qty: (x.qty || 1) + 1 } : x,
+        );
+      } else {
+        return [...prev, { ...item, qty: 1 }];
+      }
+    });
   };
 
   return (

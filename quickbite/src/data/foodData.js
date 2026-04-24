@@ -1,6 +1,7 @@
 export const foodItems = [
   // 🍗 NON-VEG
   {
+    id: 1,
     name: "Burger",
     price: 120,
     category: "nonveg",
@@ -8,6 +9,7 @@ export const foodItems = [
     img: new URL("../assets/foods/burger.jpg", import.meta.url).href,
   },
   {
+    id: 2,
     name: "Chicken Biriyani",
     price: 250,
     category: "nonveg",
@@ -15,6 +17,7 @@ export const foodItems = [
     img: new URL("../assets/foods/chicken-biriyani.jpg", import.meta.url).href,
   },
   {
+    id: 3,
     name: "Chicken Pizza",
     price: 220,
     category: "nonveg",
@@ -22,6 +25,7 @@ export const foodItems = [
     img: new URL("../assets/foods/chicken-pizza.jpg", import.meta.url).href,
   },
   {
+    id: 4,
     name: "Chicken Fried Rice",
     price: 190,
     category: "nonveg",
@@ -29,6 +33,7 @@ export const foodItems = [
     img: new URL("../assets/foods/chicken-fried.jpg", import.meta.url).href,
   },
   {
+    id: 5,
     name: "Mutton Biriyani",
     price: 310,
     category: "nonveg",
@@ -36,6 +41,7 @@ export const foodItems = [
     img: new URL("../assets/foods/mutton-biriyani.jpg", import.meta.url).href,
   },
   {
+    id: 6,
     name: "Mutton Masala",
     price: 280,
     category: "nonveg",
@@ -43,6 +49,7 @@ export const foodItems = [
     img: new URL("../assets/foods/mutton-masala.jpg", import.meta.url).href,
   },
   {
+    id: 7,
     name: "Fish Fry",
     price: 150,
     category: "nonveg",
@@ -50,6 +57,7 @@ export const foodItems = [
     img: new URL("../assets/foods/fish-fry.jpg", import.meta.url).href,
   },
   {
+    id: 8,
     name: "Grill Chicken",
     price: 350,
     category: "nonveg",
@@ -57,6 +65,7 @@ export const foodItems = [
     img: new URL("../assets/foods/grill-chicken.jpg", import.meta.url).href,
   },
   {
+    id: 9,
     name: "Fish Curry Meals",
     price: 320,
     category: "nonveg",
@@ -66,6 +75,7 @@ export const foodItems = [
 
   // 🌿 VEG
   {
+    id: 10,
     name: "Paneer Butter Masala",
     price: 320,
     category: "veg",
@@ -73,6 +83,7 @@ export const foodItems = [
     img: new URL("../assets/foods/paneer.jpg", import.meta.url).href,
   },
   {
+    id: 11,
     name: "Veg Pizza",
     price: 150,
     category: "veg",
@@ -80,6 +91,7 @@ export const foodItems = [
     img: new URL("../assets/foods/veg-pizza.jpeg", import.meta.url).href,
   },
   {
+    id: 12,
     name: "French Fries",
     price: 90,
     category: "veg",
@@ -87,6 +99,7 @@ export const foodItems = [
     img: new URL("../assets/foods/french-fries.jpg", import.meta.url).href,
   },
   {
+    id: 13,
     name: "Noodles",
     price: 130,
     category: "veg",
@@ -94,6 +107,7 @@ export const foodItems = [
     img: new URL("../assets/foods/noodles.jpg", import.meta.url).href,
   },
   {
+    id: 14,
     name: "Veg Biriyani",
     price: 160,
     category: "veg",
@@ -101,6 +115,7 @@ export const foodItems = [
     img: new URL("../assets/foods/veg-biryani.jpg", import.meta.url).href,
   },
   {
+    id: 15,
     name: "Parotta",
     price: 60,
     category: "veg",
@@ -108,6 +123,7 @@ export const foodItems = [
     img: new URL("../assets/foods/parotta.jpg", import.meta.url).href,
   },
   {
+    id: 16,
     name: "Mushroom Fry",
     price: 130,
     category: "veg",
@@ -117,6 +133,7 @@ export const foodItems = [
 
   // 🍽 BREAKFAST
   {
+    id: 17,
     name: "Dosa",
     price: 70,
     category: "breakfast",
@@ -124,6 +141,7 @@ export const foodItems = [
     img: new URL("../assets/foods/dosa.jpg", import.meta.url).href,
   },
   {
+    id: 18,
     name: "Idly",
     price: 50,
     category: "breakfast",
@@ -131,6 +149,7 @@ export const foodItems = [
     img: new URL("../assets/foods/idly.jpg", import.meta.url).href,
   },
   {
+    id: 19,
     name: "Poori",
     price: 80,
     category: "breakfast",
@@ -138,6 +157,7 @@ export const foodItems = [
     img: new URL("../assets/foods/poori.jpg", import.meta.url).href,
   },
   {
+    id: 20,
     name: "Pongal",
     price: 90,
     category: "breakfast",
@@ -147,6 +167,7 @@ export const foodItems = [
 
   // 🧃 JUICES
   {
+    id: 21,
     name: "Milkshake",
     price: 100,
     category: "juices",
@@ -154,6 +175,7 @@ export const foodItems = [
     img: new URL("../assets/foods/milkshake.jpg", import.meta.url).href,
   },
   {
+    id: 22,
     name: "Falooda",
     price: 120,
     category: "juices",
@@ -161,6 +183,7 @@ export const foodItems = [
     img: new URL("../assets/foods/falooda.jpg", import.meta.url).href,
   },
   {
+    id: 23,
     name: "Orange Juice",
     price: 60,
     category: "juices",
@@ -168,6 +191,7 @@ export const foodItems = [
     img: new URL("../assets/foods/orange.jpg", import.meta.url).href,
   },
   {
+    id: 24,
     name: "Apple Juice",
     price: 70,
     category: "juices",
@@ -175,6 +199,7 @@ export const foodItems = [
     img: new URL("../assets/foods/apple.jpg", import.meta.url).href,
   },
   {
+    id: 25,
     name: "Muskmelon Juice",
     price: 75,
     category: "juices",
@@ -182,6 +207,7 @@ export const foodItems = [
     img: new URL("../assets/foods/muskmelon.jpg", import.meta.url).href,
   },
   {
+    id: 26,
     name: "Lemon Juice",
     price: 60,
     category: "juices",
@@ -191,6 +217,7 @@ export const foodItems = [
 
   // 🍰 DESSERT
   {
+    id: 27,
     name: "Ice Cream",
     price: 80,
     category: "dessert",
@@ -198,6 +225,7 @@ export const foodItems = [
     img: new URL("../assets/foods/icecream.jpg", import.meta.url).href,
   },
   {
+    id: 28,
     name: "Palkova",
     price: 90,
     category: "dessert",
@@ -205,6 +233,7 @@ export const foodItems = [
     img: new URL("../assets/foods/palkova.jpg", import.meta.url).href,
   },
   {
+    id: 29,
     name: "Dessert",
     price: 110,
     category: "dessert",
@@ -212,6 +241,7 @@ export const foodItems = [
     img: new URL("../assets/foods/desert.jpg", import.meta.url).href,
   },
   {
+    id: 30,
     name: "Brownie",
     price: 100,
     category: "dessert",
@@ -219,6 +249,7 @@ export const foodItems = [
     img: new URL("../assets/foods/brownie.jpg", import.meta.url).href,
   },
   {
+    id: 31,
     name: "Halwa",
     price: 80,
     category: "dessert",
@@ -228,6 +259,7 @@ export const foodItems = [
 
   // 🍟 SNACKS
   {
+    id: 32,
     name: "Samosa",
     price: 20,
     category: "snacks",
@@ -235,6 +267,7 @@ export const foodItems = [
     img: new URL("../assets/foods/samosha.jpg", import.meta.url).href,
   },
   {
+    id: 33,
     name: "Bajji",
     price: 25,
     category: "snacks",
@@ -242,6 +275,7 @@ export const foodItems = [
     img: new URL("../assets/foods/bajii.jpg", import.meta.url).href,
   },
   {
+    id: 34,
     name: "Bonda",
     price: 20,
     category: "snacks",
@@ -249,6 +283,7 @@ export const foodItems = [
     img: new URL("../assets/foods/bonda.jpg", import.meta.url).href,
   },
   {
+    id: 35,
     name: "Veg Puffs",
     price: 30,
     category: "snacks",
@@ -256,6 +291,7 @@ export const foodItems = [
     img: new URL("../assets/foods/veg-puffs.jpg", import.meta.url).href,
   },
   {
+    id: 36,
     name: "Egg Puffs",
     price: 35,
     category: "snacks",

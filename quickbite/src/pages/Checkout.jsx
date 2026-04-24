@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from "../context/CartContext"; // ✅ ADD
 
 export default function Checkout() {
   const navigate = useNavigate();
+
+  // ✅ GET CART
+  const { cart, setCart } = useContext(CartContext);
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -51,14 +55,29 @@ export default function Checkout() {
       navigator.vibrate(300);
     }
 
-    // ⭐ SHOW SUCCESS SCREEN
+    // ✅ SAVE FULL ORDER (WITH CART ITEMS)
+    const orderData = {
+      id: Date.now(),
+      name,
+      phone,
+      address: useLiveLocation ? location : address,
+      paymentMethod,
+      date: new Date().toLocaleString(),
+      items: cart, // 🔥 IMPORTANT FIX
+    };
+
+    let oldOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    oldOrders.push(orderData);
+    localStorage.setItem("orders", JSON.stringify(oldOrders));
+
+    // ✅ CLEAR CART AFTER ORDER
+    setCart([]);
+
+    // ⭐ SUCCESS SCREEN
     setOrderSuccess(true);
 
-    // ⏳ AFTER 2.5 SEC GO TO HOME PAGE (FIXED)
     setTimeout(() => {
       setOrderSuccess(false);
-
-      // ✅ FIX: ALWAYS GO HOME (NOT LOGIN)
       navigate("/", { replace: true });
     }, 2500);
   };
@@ -67,7 +86,7 @@ export default function Checkout() {
     <div style={{ padding: "20px", maxWidth: "500px", margin: "auto" }}>
       <h1>📦 Checkout</h1>
 
-      {/* ✅ FULL SCREEN SUCCESS */}
+      {/* SUCCESS SCREEN */}
       {orderSuccess && (
         <div className="success-page">
           <div className="success-box">
@@ -153,7 +172,7 @@ export default function Checkout() {
   );
 }
 
-// 🎨 STYLES
+// 🎨 STYLES (SAME)
 const inputStyle = {
   width: "100%",
   padding: "10px",
