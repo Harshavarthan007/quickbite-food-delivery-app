@@ -1,27 +1,43 @@
-body {
+* {
   margin: 0;
-  font-family: Arial;
-  background: #111;
-  color: white;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* NAVBAR */
+/* ===== BODY ===== */
+body {
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: white;
+  overflow-x: hidden;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ===== IMAGES ===== */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ===== NAVBAR ===== */
 .navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 10px 15px;
 }
 
-/* group right side buttons */
 .navbar button {
   margin-left: 10px;
 }
 
-/* push FIRST button (Cart) to right */
 .navbar button:first-of-type {
   margin-left: auto;
 }
+
+/* ===== WELCOME ===== */
 .welcome {
   background: green;
   color: white;
@@ -30,29 +46,28 @@ body {
   font-size: 14px;
 }
 
-/* GRID */
+/* ===== GRID (FIXED: 4 DESKTOP) ===== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* 💻 FIXED */
+  gap: 12px;
+  padding: 12px;
+  width: 100%;
+  justify-content: center;
 }
 
-/* FOOD CARD */
+/* ===== CARD ===== */
 .card {
+  width: 100%;
+  min-width: 0;
   background: #222;
-  padding: 10px;
-  border-radius: 10px;
-}
-.active-sort {
-  background: linear-gradient(45deg, orange, red);
-  color: white;
-  font-weight: bold;
+  padding: 12px;
+  border-radius: 12px;
+  transition: 0.2s;
 }
 
-button:hover {
-  transform: scale(1.05);
-  transition: 0.2s;
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .card img {
@@ -62,14 +77,19 @@ button:hover {
   border-radius: 8px;
 }
 
-/* BUTTONS */
+/* ===== BUTTON ===== */
 button {
   background: orange;
   border: none;
-  padding: 8px;
+  padding: 10px;
   margin: 5px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.05);
 }
 
 button.active {
@@ -78,35 +98,86 @@ button.active {
   font-weight: bold;
 }
 
-/* INPUT */
+.active-sort {
+  background: linear-gradient(45deg, orange, red);
+  color: white;
+  font-weight: bold;
+}
+
+/* ===== INPUT ===== */
 input {
-  padding: 6px;
+  padding: 8px;
   margin-top: 5px;
-  border-radius: 5px;
+  border-radius: 6px;
   border: none;
 }
 
-/* LOGIN */
+/* ===== LOGIN ===== */
 .login {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-size: cover;
 }
 
 .login-box {
   background: rgba(0, 0, 0, 0.7);
   padding: 30px;
   border-radius: 10px;
+  width: 350px;
+  max-width: 90%;
 }
 
-/* CART PAGE (optional old page) */
-.cart {
-  padding: 20px;
+/* ===== CART ===== */
+.side-cart {
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 300px;
+  max-width: 100%;
+  height: 100vh;
+  background: #1c1c1c;
+  padding: 15px;
+  overflow-y: auto;
+  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* TOAST */
+.side-cart img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* ===== CART ITEM ===== */
+.cart-item {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+  background: #2a2a2a;
+  padding: 8px;
+  border-radius: 10px;
+}
+
+.cart-item button {
+  margin: 2px;
+  padding: 4px 8px;
+}
+
+/* ===== SETTINGS ===== */
+.side-settings {
+  position: fixed;
+  right: 10px;
+  top: 70px;
+  width: 220px;
+  max-width: 90%;
+  background: #1f1f1f;
+  padding: 15px;
+  border-radius: 10px;
+  z-index: 1001;
+}
+
+/* ===== TOAST ===== */
 .toast {
   position: fixed;
   top: 20px;
@@ -120,57 +191,45 @@ input {
   animation: slideDown 0.3s ease-in-out;
 }
 
-/* SETTINGS BOX (TOP RIGHT) */
-.side-settings {
-  position: fixed;
-  right: 10px;
-  top: 70px;
-  width: 220px;
-  background: #1f1f1f;
-  padding: 15px;
-  border-radius: 10px;
-  z-index: 1001;
+/* ===== BANNER ===== */
+.banner {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
 }
 
-/* CART NEAR SETTINGS (BELOW IT) */
-.side-cart {
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 300px;
-  height: 100vh;
-  background: #1c1c1c;
-  color: white;
-  padding: 15px;
-  overflow-y: auto;
-  box-shadow: -5px 0 10px rgba(0, 0, 0, 0.5);
-}
-
-/* CART IMAGE */
-.side-cart img {
-  width: 60px;
-  height: 60px;
-  border-radius: 8px;
+.banner img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-/* CART ITEM */
-.cart-item {
+/* ===== CATEGORY ===== */
+.category-title {
+  text-align: center;
+  margin: 20px auto 10px;
+}
+
+.category-container {
   display: flex;
-  gap: 10px;
-  margin: 10px 0;
-  background: #2a2a2a;
-  padding: 8px;
-  border-radius: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
 }
 
-/* CART BUTTONS */
-.cart-item button {
-  margin: 2px;
-  padding: 3px 8px;
+/* ===== PRICE / SORT ===== */
+.price-title,
+.sort-title {
+  text-align: center;
+  margin-top: 10px;
 }
 
-/* ANIMATION */
+.price-container,
+.sort-container {
+  text-align: center;
+}
+
+/* ===== ANIMATION ===== */
 @keyframes slideDown {
   from {
     transform: translateX(-50%) translateY(-20px);
@@ -179,5 +238,154 @@ input {
   to {
     transform: translateX(-50%) translateY(0);
     opacity: 1;
+  }
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* 📱 MOBILE */
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .card {
+    padding: 8px;
+  }
+
+  .card img {
+    height: 100px;
+  }
+
+  .card h3 {
+    font-size: 14px;
+  }
+
+  .card p,
+  .card span {
+    font-size: 12px;
+  }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    flex-wrap: nowrap;
+  }
+
+  /* 🍔 QUICKBITE */
+  .navbar h2 {
+    font-size: clamp(12px, 2vw, 18px);
+    white-space: nowrap;
+    flex-shrink: 0;
+    transform: translateX(-4px);
+  }
+
+  /* 🔍 SEARCH */
+  .navbar input {
+    flex: 1;
+    min-width: 110px;
+    max-width: 500px;
+    padding: 8px 12px;
+    font-size: clamp(11px, 2vw, 14px);
+    border-radius: 30px;
+  }
+
+  /* 🛒 + ⚙️ RIGHT SIDE */
+  @media (max-width: 600px) {
+    .navbar div {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+      padding-left: 3px; /* ✅ gives space so Settings is never cut */
+    }
+  }
+  @media (max-width: 600px) {
+    .navbar div button:first-child {
+      transform: translateX(7px);
+    }
+  }
+
+  /* BUTTONS ALWAYS FIT */
+  .navbar div button {
+    font-size: clamp(9px, 1.8vw, 13px);
+    padding: 8px 8px;
+    white-space: nowrap;
+  }
+
+  /* SAFETY FIX (no side scroll on any device) */
+  html,
+  body {
+    overflow-x: hidden;
+  }
+  /* ===== BANNER ===== */
+  .banner {
+    width: 100%;
+    height: 200px;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    background: #111;
+  }
+
+  /* ===== FIX OVERFLOW (Samsung fix) ===== */
+  html,
+  body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  .side-cart {
+    width: 100%;
+  }
+
+  .side-settings {
+    width: 90%;
+    right: 5%;
+  }
+
+  .login-box {
+    width: 90%;
+  }
+
+  .toast {
+    width: 90%;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .banner {
+    height: 250px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .side-cart {
+    width: 80%;
+  }
+
+  .login-box {
+    width: 70%;
   }
 }

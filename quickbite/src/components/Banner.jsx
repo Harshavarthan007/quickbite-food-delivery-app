@@ -18,12 +18,8 @@ export default function Banner() {
   }, []);
 
   return (
-    <div style={{ width: "100%", height: "350px", overflow: "hidden" }}>
-      <img
-        src={images[index]}
-        alt="banner"
-        style={{ width: "100%", height: "100%", objectFit: "cover" }}
-      />
+    <div className="banner">
+      <img src={images[index]} alt="banner" />
     </div>
   );
 }

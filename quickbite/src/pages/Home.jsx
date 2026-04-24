@@ -95,9 +95,9 @@ export default function Home() {
       <Banner />
 
       {/* 🍽 CATEGORY */}
-      <h2 style={{ textAlign: "center", marginTop: "30px" }}>Categories</h2>
+      <h2 className="category-title">Categories</h2>
 
-      <div style={{ textAlign: "center" }}>
+      <div className="category-container">
         {btn("all", "All")}
         {btn("veg", "Veg")}
         {btn("nonveg", "Non-Veg")}
@@ -108,18 +108,13 @@ export default function Home() {
       </div>
 
       {/* 💰 PRICE FILTER */}
-      <h3 style={{ textAlign: "center", marginTop: "10px" }}>Price Filter</h3>
+      <h3 className="price-title">Price Filter</h3>
 
-      <div style={{ textAlign: "center" }}>
+      <div className="price-container">
         <select
           value={price}
           onChange={(e) => setPrice(e.target.value)}
-          style={{
-            padding: "10px",
-            borderRadius: "8px",
-            background: "#ffd700",
-            border: "1px solid black",
-          }}
+          className="price-select"
         >
           <option value="all">All Prices</option>
           <option value="0-100">₹0 - ₹100</option>
@@ -128,16 +123,14 @@ export default function Home() {
           <option value="300+">₹300+</option>
         </select>
       </div>
+      {/*sort*/}
+      <h3 className="sort-title">Sort By</h3>
 
-      {/* ✨ SORT */}
-      <h3 style={{ textAlign: "center", marginTop: "15px" }}>Sort By</h3>
-
-      <div style={{ textAlign: "center" }}>
+      <div className="sort-container">
         <button onClick={() => setSort("low-high")}>Low → High</button>
         <button onClick={() => setSort("high-low")}>High → Low</button>
         <button onClick={() => setSort("rating")}>Top Rated</button>
       </div>
-
       {/* 🍔 FOOD GRID */}
       <div className="grid">
         {filtered.length > 0 ? (
