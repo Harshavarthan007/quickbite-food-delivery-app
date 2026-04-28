@@ -29,14 +29,45 @@ export default function Orders() {
               <b>Order #{index + 1}</b>
             </p>
 
+            {/* 🔥 ITEMS WITH IMAGE */}
             {order.items.map((item, i) => (
-              <p key={i}>
-                {item.name} × {item.qty} = ₹{item.price * item.qty}
-              </p>
+              <div
+                key={i}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  marginBottom: "8px",
+                }}
+              >
+                {/* ✅ IMAGE */}
+                <img
+                  src={item.img}
+                  alt={item.name}
+                  style={{
+                    width: "60px",
+                    height: "60px",
+                    borderRadius: "8px",
+                    objectFit: "cover",
+                  }}
+                />
+
+                {/* ✅ DETAILS */}
+                <div>
+                  <p style={{ margin: 0 }}>
+                    {item.name} × {item.qty}
+                  </p>
+                  <p style={{ margin: 0, fontSize: "12px", color: "gray" }}>
+                    ₹{item.price} each
+                  </p>
+                  <p style={{ margin: 0 }}>Total: ₹{item.price * item.qty}</p>
+                </div>
+              </div>
             ))}
 
+            {/* ✅ TOTAL */}
             <p style={{ fontWeight: "bold" }}>
-              Total: ₹
+              Grand Total: ₹
               {order.items.reduce(
                 (sum, item) => sum + item.price * item.qty,
                 0,

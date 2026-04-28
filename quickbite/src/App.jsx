@@ -8,17 +8,19 @@ import Checkout from "./pages/Checkout";
 import Settings from "./pages/Settings";
 import Wishlist from "./pages/Wishlist";
 import Orders from "./pages/Orders";
+
 export default function App() {
   return (
     <CartProvider>
       <BrowserRouter>
         <Routes>
-          {/* ✅ HOME PAGE */}
-          <Route path="/" element={<Home />} />
+          {/* ✅ LOGIN FIRST */}
+          <Route path="/" element={<Login />} />
 
-          {/* ✅ LOGIN PAGE */}
-          <Route path="/login" element={<Login />} />
+          {/* ✅ HOME AFTER LOGIN */}
+          <Route path="/home" element={<Home />} />
 
+          {/* OTHER PAGES */}
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/settings" element={<Settings />} />

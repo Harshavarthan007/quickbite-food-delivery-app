@@ -78,7 +78,7 @@ export default function Checkout() {
 
     setTimeout(() => {
       setOrderSuccess(false);
-      navigate("/", { replace: true });
+      navigate("/home", { replace: true });
     }, 2500);
   };
 
