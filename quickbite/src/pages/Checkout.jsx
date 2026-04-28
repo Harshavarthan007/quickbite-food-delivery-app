@@ -32,7 +32,6 @@ export default function Checkout() {
     );
   };
 
-  // ✅ COMMON ORDER SAVE FUNCTION
   const saveOrder = () => {
     const orderData = {
       id: Date.now(),
@@ -68,10 +67,8 @@ export default function Checkout() {
       return;
     }
 
-    // 💳 FAKE ONLINE PAYMENT
     if (paymentMethod === "online") {
-      setOrderSuccess(true); // show success UI directly
-
+      setOrderSuccess(true);
       setTimeout(() => {
         saveOrder();
       }, 1500);
@@ -79,7 +76,6 @@ export default function Checkout() {
       return;
     }
 
-    // 🚚 COD FLOW
     saveOrder();
   };
 

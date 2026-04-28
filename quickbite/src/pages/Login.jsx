@@ -35,7 +35,6 @@ export default function Login() {
 
       localStorage.setItem("loggedUser", JSON.stringify({ email }));
 
-      // 🔥 ONLY ADD THIS LINE
       window.dispatchEvent(new Event("storage"));
 
       navigate("/home");
