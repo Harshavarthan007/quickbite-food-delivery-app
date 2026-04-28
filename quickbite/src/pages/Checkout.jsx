@@ -1,11 +1,10 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../context/CartContext"; // ✅ ADD
+import { CartContext } from "../context/CartContext";
 
 export default function Checkout() {
   const navigate = useNavigate();
 
-  // ✅ GET CART
   const { cart, setCart } = useContext(CartContext);
 
   const [name, setName] = useState("");
@@ -28,10 +27,34 @@ export default function Checkout() {
         const lat = pos.coords.latitude;
         const lng = pos.coords.longitude;
         setLocation(`Lat: ${lat}, Lng: ${lng}`);
-        alert("📍 Location captured!");
       },
       () => alert("❌ Permission denied"),
     );
+  };
+
+  // ✅ COMMON ORDER SAVE FUNCTION
+  const saveOrder = () => {
+    const orderData = {
+      id: Date.now(),
+      name,
+      phone,
+      address: useLiveLocation ? location : address,
+      paymentMethod,
+      date: new Date().toLocaleString(),
+      items: cart,
+    };
+
+    let oldOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    oldOrders.push(orderData);
+    localStorage.setItem("orders", JSON.stringify(oldOrders));
+
+    setCart([]);
+    setOrderSuccess(true);
+
+    setTimeout(() => {
+      setOrderSuccess(false);
+      navigate("/home", { replace: true });
+    }, 2000);
   };
 
   const placeOrder = () => {
@@ -45,41 +68,19 @@ export default function Checkout() {
       return;
     }
 
+    // 💳 FAKE ONLINE PAYMENT
     if (paymentMethod === "online") {
-      alert("💳 Redirecting to payment gateway... (demo)");
+      setOrderSuccess(true); // show success UI directly
+
+      setTimeout(() => {
+        saveOrder();
+      }, 1500);
+
       return;
     }
 
-    // 📳 vibration
-    if (navigator.vibrate) {
-      navigator.vibrate(300);
-    }
-
-    // ✅ SAVE FULL ORDER (WITH CART ITEMS)
-    const orderData = {
-      id: Date.now(),
-      name,
-      phone,
-      address: useLiveLocation ? location : address,
-      paymentMethod,
-      date: new Date().toLocaleString(),
-      items: cart, // 🔥 IMPORTANT FIX
-    };
-
-    let oldOrders = JSON.parse(localStorage.getItem("orders")) || [];
-    oldOrders.push(orderData);
-    localStorage.setItem("orders", JSON.stringify(oldOrders));
-
-    // ✅ CLEAR CART AFTER ORDER
-    setCart([]);
-
-    // ⭐ SUCCESS SCREEN
-    setOrderSuccess(true);
-
-    setTimeout(() => {
-      setOrderSuccess(false);
-      navigate("/home", { replace: true });
-    }, 2500);
+    // 🚚 COD FLOW
+    saveOrder();
   };
 
   return (
@@ -172,7 +173,7 @@ export default function Checkout() {
   );
 }
 
-// 🎨 STYLES (SAME)
+// 🎨 STYLES
 const inputStyle = {
   width: "100%",
   padding: "10px",
